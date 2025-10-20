@@ -1,0 +1,27 @@
+<div class="chat-input-container">
+  <div class="input-wrapper">
+    <textarea
+      class="message-input"
+      [(ngModel)]="messageInput"
+      (keydown)="onKeyDown($event)"
+      [disabled]="isDisabled()"
+      placeholder="Envoyez un message à Legichat..."
+      rows="1"
+    ></textarea>
+
+    <button
+      class="send-button"
+      (click)="onSubmit()"
+      [disabled]="!messageInput().trim() || isDisabled()"
+      aria-label="Envoyer le message"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="input-info">
+    <span class="info-text">Appuyez sur Entrée pour envoyer, Shift+Entrée pour une nouvelle ligne</span>
+  </div>
+</div>

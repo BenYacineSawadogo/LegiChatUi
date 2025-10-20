@@ -1,0 +1,29 @@
+<div class="chat-container">
+  @if (activeConversation()) {
+    <div class="chat-header">
+      <h2 class="conversation-title">{{ activeConversation()?.title }}</h2>
+    </div>
+
+    <div class="messages-container" #messagesContainer>
+      @if (messages().length === 0) {
+        <div class="empty-state">
+          <div class="empty-icon">💬</div>
+          <h3>Bienvenue sur Legichat</h3>
+          <p>Commencez une conversation en envoyant un message ci-dessous.</p>
+        </div>
+      } @else {
+        @for (message of messages(); track message.id) {
+          <app-message [message]="message" />
+        }
+      }
+    </div>
+
+    <app-chat-input (messageSent)="onSendMessage($event)" />
+  } @else {
+    <div class="no-conversation">
+      <div class="empty-icon">📭</div>
+      <h3>Aucune conversation sélectionnée</h3>
+      <p>Créez une nouvelle conversation pour commencer.</p>
+    </div>
+  }
+</div>

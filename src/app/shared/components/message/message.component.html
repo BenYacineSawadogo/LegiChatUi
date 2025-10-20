@@ -1,0 +1,33 @@
+<div class="message" [class.user-message]="message.role === 'user'" [class.assistant-message]="message.role === 'assistant'">
+  <div class="message-avatar">
+    @if (message.role === 'user') {
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+    } @else {
+      <span class="bot-icon">🤖</span>
+    }
+  </div>
+
+  <div class="message-content-wrapper">
+    <div class="message-header">
+      <span class="message-role">
+        {{ message.role === 'user' ? 'Vous' : 'Legichat' }}
+      </span>
+      <span class="message-time">{{ formatTime(message.timestamp) }}</span>
+    </div>
+
+    <div class="message-content">
+      @if (message.isLoading) {
+        <div class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      } @else {
+        <div class="message-text">{{ message.content }}</div>
+      }
+    </div>
+  </div>
+</div>
