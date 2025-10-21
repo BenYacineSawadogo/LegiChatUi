@@ -1,4 +1,12 @@
 /* ===================================
+   HOST COMPONENT (Desktop sizing)
+   =================================== */
+
+:host {
+  display: contents; // Ne pas créer de boîte supplémentaire
+}
+
+/* ===================================
    BURGER MENU (Mobile-First)
    =================================== */
 
@@ -51,9 +59,14 @@
     transform: scale(0.95);
   }
 
-  // Afficher sur mobile et tablette
+  // Afficher sur mobile et tablette uniquement
   @media (max-width: 1080px) {
     display: flex;
+  }
+
+  // Sur desktop, ne jamais afficher
+  @media (min-width: 1081px) {
+    display: none !important;
   }
 }
 
@@ -122,6 +135,11 @@
   border-bottom: 1px solid #e5e7eb;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  // Sur mobile, ajouter du padding-top pour éviter que le burger cache le titre
+  @media (max-width: 1080px) {
+    padding-top: 4.5rem; // Espace pour le burger (48px + 2*1rem margin)
+  }
 }
 
 .app-title {
