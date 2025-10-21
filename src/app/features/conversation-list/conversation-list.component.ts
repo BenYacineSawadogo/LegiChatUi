@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConversationService } from '../../core/services/conversation.service';
 import { Conversation } from '../../core/models/conversation.model';
@@ -6,6 +6,7 @@ import { Conversation } from '../../core/models/conversation.model';
 /**
  * Conversation List Component
  * Displays sidebar with list of conversations
+ * Mobile-first with burger menu
  */
 @Component({
   selector: 'app-conversation-list',
@@ -20,6 +21,36 @@ export class ConversationListComponent {
   conversations = this.conversationService.conversations;
   activeConversationId = this.conversationService.activeConversationId;
 
+  // Gestion du menu burger (mobile)
+  isSidebarOpen = signal(false);
+
+  /**
+   * Détecter les changements de taille d'écran
+   */
+  @HostListener('window:resize')
+  onResize() {
+    // Fermer la sidebar sur desktop
+    if (window.innerWidth > 1024) {
+      this.isSidebarOpen.set(false);
+    }
+  }
+
+  /**
+   * Toggle sidebar sur mobile
+   */
+  toggleSidebar(): void {
+    this.isSidebarOpen.set(!this.isSidebarOpen());
+  }
+
+  /**
+   * Fermer la sidebar (appelé après sélection d'une conversation sur mobile)
+   */
+  closeSidebar(): void {
+    if (window.innerWidth <= 1024) {
+      this.isSidebarOpen.set(false);
+    }
+  }
+
   /**
    * Create a new conversation
    */
@@ -32,6 +63,7 @@ export class ConversationListComponent {
    */
   onSelectConversation(conversationId: string): void {
     this.conversationService.setActiveConversation(conversationId);
+    this.closeSidebar(); // Fermer la sidebar sur mobile après sélection
   }
 
   /**
