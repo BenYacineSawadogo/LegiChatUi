@@ -14,7 +14,7 @@
   overflow: hidden;
 
   // Mobile: container ajusté
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     width: 100%;
     height: 100%;
   }
@@ -28,7 +28,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 
   // Responsive: padding réduit sur mobile et tablette
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     padding: 1rem 1.25rem;
   }
 }

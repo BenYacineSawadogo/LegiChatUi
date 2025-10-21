@@ -52,7 +52,7 @@
   }
 
   // Afficher sur mobile et tablette
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     display: flex;
   }
 }
@@ -76,7 +76,7 @@
     pointer-events: all;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     display: block;
   }
 }
@@ -99,7 +99,7 @@
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
 
   // Mobile: sidebar en overlay
-  @media (max-width: 1024px) {
+  @media (max-width: 1080px) {
     position: fixed;
     top: 0;
     left: 0;

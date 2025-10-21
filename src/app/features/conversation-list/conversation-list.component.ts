@@ -30,7 +30,7 @@ export class ConversationListComponent {
   @HostListener('window:resize')
   onResize() {
     // Fermer la sidebar sur desktop
-    if (window.innerWidth > 1024) {
+    if (window.innerWidth > 1080) {
       this.isSidebarOpen.set(false);
     }
   }
@@ -46,7 +46,7 @@ export class ConversationListComponent {
    * Fermer la sidebar (appelé après sélection d'une conversation sur mobile)
    */
   closeSidebar(): void {
-    if (window.innerWidth <= 1024) {
+    if (window.innerWidth <= 1080) {
       this.isSidebarOpen.set(false);
     }
   }

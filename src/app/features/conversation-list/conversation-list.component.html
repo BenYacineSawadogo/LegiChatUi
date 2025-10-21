@@ -1,4 +1,15 @@
-<aside class="conversation-sidebar">
+<!-- Menu Burger (Mobile only) -->
+<button class="burger-menu" (click)="toggleSidebar()" aria-label="Menu" [class.open]="isSidebarOpen()">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- Overlay pour fermer la sidebar (Mobile only) -->
+<div class="sidebar-overlay" [class.visible]="isSidebarOpen()" (click)="closeSidebar()"></div>
+
+<!-- Sidebar -->
+<aside class="conversation-sidebar" [class.open]="isSidebarOpen()">
   <div class="sidebar-header">
     <h1 class="app-title">
       <span class="logo-icon">💬</span>
