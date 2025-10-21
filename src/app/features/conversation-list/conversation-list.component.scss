@@ -38,6 +38,18 @@
     transition: all 0.3s ease;
   }
 
+  // Quand la sidebar est ouverte, positionner le burger à droite de la sidebar
+  &.open {
+    // Calculer la position : largeur de la sidebar (85% max 320px) + un peu d'espace
+    left: calc(min(85vw, 320px) + 1rem);
+
+    // Sur très petits écrans, le mettre dans le coin supérieur droit
+    @media (max-width: 400px) {
+      left: auto;
+      right: 1rem;
+    }
+  }
+
   &.open span:nth-child(1) {
     transform: rotate(45deg) translate(7px, 7px);
   }
@@ -135,11 +147,6 @@
   border-bottom: 1px solid #e5e7eb;
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
-  // Sur mobile, ajouter du padding-top pour éviter que le burger cache le titre
-  @media (max-width: 1080px) {
-    padding-top: 4.5rem; // Espace pour le burger (48px + 2*1rem margin)
-  }
 }
 
 .app-title {
