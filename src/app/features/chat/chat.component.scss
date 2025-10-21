@@ -43,6 +43,8 @@
   // Responsive: padding réduit sur mobile et tablette
   @media (max-width: 1080px) {
     padding: 1rem 1.25rem;
+    // Ajouter du padding-left pour éviter que le burger cache le titre
+    padding-left: 5rem; // Espace pour le burger (48px + marges)
   }
 }
 
