@@ -170,13 +170,13 @@ L'application suit les principes SOLID :
 
 ## 📱 Design Responsive (Mobile-First)
 
-### Desktop (> 1024px)
+### Desktop (> 1080px)
 - Interface en plein écran occupant 100% de l'espace disponible
 - Sidebar des conversations visible en permanence (280px)
 - Messages en bulles avec ombres et animations au survol
 - Utilisateur à droite (bulles vertes), chatbot à gauche (bulles blanches)
 
-### Mobile & Tablette (≤ 1024px)
+### Mobile & Tablette (≤ 1080px)
 - Menu burger animé en haut à gauche
 - Sidebar en overlay coulissant depuis la gauche
 - Overlay semi-transparent pour fermer la sidebar
