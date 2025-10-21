@@ -1,16 +1,17 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   flex: 1;
   min-width: 0;
   background: white;
   overflow: hidden;
 
-  // Responsive pour mobile
-  @media (max-width: 768px) {
-    height: calc(100vh - 200px);
-    min-height: 60vh;
+  // Responsive pour mobile et tablette
+  @media (max-width: 1024px) {
+    height: auto;
+    flex: 1;
+    min-height: 0;
   }
 }
 
@@ -18,9 +19,12 @@
   padding: 1rem 1.5rem;
   border-bottom: 1px solid #e5e7eb;
   background: white;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  flex-shrink: 0;
+
+  // Responsive: padding réduit sur mobile et tablette
+  @media (max-width: 1024px) {
+    padding: 0.875rem 1rem;
+  }
 }
 
 .conversation-title {
