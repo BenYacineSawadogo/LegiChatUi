@@ -4,11 +4,13 @@ Interface utilisateur moderne et élégante pour Legichat, construite avec Angul
 
 ## 🎨 Caractéristiques
 
-- ✨ **Interface moderne** similaire à ChatGPT
+- ✨ **Interface moderne** similaire à ChatGPT avec design en bulles
 - 🎨 **Thème vert et blanc** élégant et professionnel
 - 💬 **Gestion de conversations multiples**
 - 🔄 **State management** avec Angular Signals
-- 📱 **Responsive** et adapté aux mobiles
+- 📱 **Mobile-first design** avec menu burger et responsive complet
+- 🖥️ **Plein écran desktop** - interface occupant 100% de l'espace disponible
+- 💭 **Messages en bulles** avec ombres et animations modernes
 - ⚡ **Performance optimisée** avec standalone components
 - 🏗️ **Architecture SOLID** et Clean Code
 - 💾 **Persistance locale** des conversations et messages
@@ -165,6 +167,29 @@ L'application suit les principes SOLID :
 - ✅ Sauvegarde automatique dans localStorage
 - ✅ Restauration des conversations au chargement
 - ✅ Conservation de l'historique des messages
+
+## 📱 Design Responsive (Mobile-First)
+
+### Desktop (> 1024px)
+- Interface en plein écran occupant 100% de l'espace disponible
+- Sidebar des conversations visible en permanence (280px)
+- Messages en bulles avec ombres et animations au survol
+- Utilisateur à droite (bulles vertes), chatbot à gauche (bulles blanches)
+
+### Mobile & Tablette (≤ 1024px)
+- Menu burger animé en haut à gauche
+- Sidebar en overlay coulissant depuis la gauche
+- Overlay semi-transparent pour fermer la sidebar
+- Sidebar se ferme automatiquement après sélection d'une conversation
+- Interface de chat plein écran
+- Padding et tailles optimisés pour écrans tactiles
+
+### Fonctionnalités du menu burger
+- Bouton 48x48px avec animation de transformation (burger → X)
+- Sidebar 85% de largeur (max 320px) sur mobile
+- Transition fluide avec `transform: translateX()`
+- Fermeture par tap sur l'overlay ou sélection de conversation
+- Z-index optimisé pour superposition correcte
 
 ## 🛠️ Commandes disponibles
 
