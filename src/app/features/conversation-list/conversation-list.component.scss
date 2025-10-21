@@ -1,11 +1,32 @@
 .conversation-sidebar {
   width: 280px;
+  min-width: 280px;
+  max-width: 280px;
   height: 100vh;
   background: #f8f9fa;
   border-right: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  flex-shrink: 0;
+
+  // Responsive pour tablette
+  @media (max-width: 1024px) {
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+  }
+
+  // Responsive pour mobile
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    min-height: 200px;
+    max-height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
 }
 
 .sidebar-header {

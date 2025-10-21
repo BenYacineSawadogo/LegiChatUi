@@ -7,6 +7,20 @@
   box-sizing: border-box;
 }
 
+/* Ensure full viewport coverage */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 /* Root Variables - Green and White Theme */
 :root {
   /* Primary Colors */
@@ -78,6 +92,11 @@ body {
   background-color: var(--color-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // Responsive: font size légèrement plus petit sur mobile
+  @media (max-width: 768px) {
+    font-size: 0.9375rem;
+  }
 }
 
 /* Headings */

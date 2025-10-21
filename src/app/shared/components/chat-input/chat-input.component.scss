@@ -2,6 +2,12 @@
   padding: 1rem;
   background: white;
   border-top: 1px solid #e5e7eb;
+  flex-shrink: 0;
+
+  // Responsive: padding réduit sur mobile
+  @media (max-width: 768px) {
+    padding: 0.75rem;
+  }
 }
 
 .input-wrapper {
@@ -104,6 +110,11 @@
 .input-info {
   margin-top: 0.5rem;
   text-align: center;
+
+  // Masquer sur mobile pour gagner de l'espace
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .info-text {

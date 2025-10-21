@@ -2,7 +2,16 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  flex: 1;
+  min-width: 0;
   background: white;
+  overflow: hidden;
+
+  // Responsive pour mobile
+  @media (max-width: 768px) {
+    height: calc(100vh - 200px);
+    min-height: 60vh;
+  }
 }
 
 .chat-header {
