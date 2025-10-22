@@ -1,48 +1,58 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, delay, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { IChatApi } from '../interfaces/chat-api.interface';
-import { Message, createMessage } from '../models/message.model';
+import { Message } from '../models/message.model';
 
 /**
  * Chat API Service implementing IChatApi interface
  * Following Dependency Inversion Principle (DIP)
- * This is a mock implementation - replace with actual API calls
+ * Connected to Flask backend with Mistral AI + FAISS RAG
  */
 @Injectable({
   providedIn: 'root'
 })
 export class ChatApiService implements IChatApi {
-  private apiUrl = ''; // Will be configured later
+  private apiUrl = 'http://localhost:5000/api';
 
   constructor(private http: HttpClient) {}
 
   /**
-   * Configure API endpoint
+   * Configure API endpoint (optional, for production)
    */
   setApiUrl(url: string): void {
     this.apiUrl = url;
   }
 
   /**
-   * Send message to API and get response
-   * Currently returns a mock response - replace with actual HTTP call
+   * Send message to backend and get AI response
+   * Backend handles conversation context automatically
    */
   sendMessage(conversationId: string, message: string): Observable<Message> {
-    // TODO: Replace with actual API call when endpoint is provided
-    // Example:
-    // return this.http.post<Message>(`${this.apiUrl}/chat`, {
-    //   conversationId,
-    //   message
-    // });
-
-    // Mock response for now
-    const mockResponse = createMessage(
+    return this.http.post<ChatResponse>(`${this.apiUrl}/chat`, {
       conversationId,
-      `Voici une réponse simulée à votre message: "${message}". Cette réponse sera remplacée par l'API réelle de Legichat.`,
-      'assistant'
+      message
+    }).pipe(
+      map(response => ({
+        id: response.id,
+        conversationId: response.conversationId,
+        content: response.content,
+        role: 'assistant' as const,
+        timestamp: new Date(response.timestamp),
+        isLoading: false
+      }))
     );
-
-    return of(mockResponse).pipe(delay(1000)); // Simulate network delay
   }
+}
+
+/**
+ * Response format from Flask backend
+ */
+interface ChatResponse {
+  id: string;
+  conversationId: string;
+  content: string;
+  role: string;
+  timestamp: string;
 }
