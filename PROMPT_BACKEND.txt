@@ -1,0 +1,76 @@
+# PROMPT POUR SESSION BACKEND CLAUDE CODE
+
+Copier-coller ce prompt dans votre nouvelle session Claude Code :
+
+---
+
+Je viens de créer un frontend Angular 20 pour mon chatbot Legichat (spécialisé en droit sénégalais). Je dois maintenant réorganiser et créer mon backend pour qu'il soit compatible avec ce frontend.
+
+Voici le fichier de spécifications complet du frontend (lit ce fichier en premier) :
+`/chemin/vers/LegiChatUi/BACKEND_SPECIFICATIONS.md`
+
+CONTEXTE :
+- Frontend : Angular 20 avec Signals, architecture SOLID
+- Design : Mobile-first (breakpoint 1080px), bulles de messages modernes
+- Stockage actuel : localStorage (temporaire)
+- Besoin : Backend avec API REST pour remplacer le stockage local
+
+TÂCHES PRINCIPALES :
+
+1. ANALYSER le fichier BACKEND_SPECIFICATIONS.md pour comprendre :
+   - Les modèles de données (Conversation, Message)
+   - Les endpoints API attendus (POST /chat minimum)
+   - Le flux de données frontend → backend
+   - Les formats de requête/réponse JSON
+
+2. PROPOSER une architecture backend complète :
+   - Structure de dossiers suivant les principes SOLID
+   - Choix de stack (NestJS recommandé, mais flexible)
+   - Schémas de base de données MongoDB
+   - Services et contrôleurs nécessaires
+
+3. IMPLÉMENTER (par ordre de priorité) :
+   a) Endpoint MVP : POST /api/chat
+      - Accepte conversationId + message
+      - Retourne la réponse de l'assistant
+      - Format JSON exact spécifié dans le doc
+
+   b) Intégration IA/LLM :
+      - Proposer des options (OpenAI GPT-4, Claude, Ollama local)
+      - Implémenter le service d'IA choisi
+      - Gérer l'historique des conversations
+
+   c) Base de données :
+      - MongoDB avec collections conversations + messages
+      - Index pour les performances
+      - Repository pattern
+
+   d) Fonctionnalités avancées (optionnel) :
+      - CRUD complet pour conversations
+      - Authentification JWT
+      - Rate limiting
+      - Caching Redis
+
+4. TESTER l'intégration avec le frontend :
+   - Vérifier que les formats JSON correspondent exactement
+   - Tester POST /api/chat avec Postman ou curl
+   - Valider le CORS pour http://localhost:4200
+
+CONTRAINTES :
+- Respecter EXACTEMENT les formats JSON du fichier de spec
+- Les UUIDs doivent être compatibles avec crypto.randomUUID()
+- Les dates en format ISO 8601
+- Le champ "role" doit être exactement "user" ou "assistant"
+
+FICHIERS À CONSULTER :
+- BACKEND_SPECIFICATIONS.md (OBLIGATOIRE - tout y est)
+- INTEGRATION_API.md (guide d'intégration frontend)
+- src/app/core/services/chat-api.service.ts (implémentation frontend actuelle)
+
+COMMENCE PAR :
+1. Lire BACKEND_SPECIFICATIONS.md en entier
+2. Me proposer une structure de projet backend
+3. Créer l'endpoint POST /api/chat avec réponses simulées (MVP)
+4. Puis progresser vers l'intégration IA réelle
+
+Tu peux me poser des questions sur les choix techniques (stack, IA, déploiement).
