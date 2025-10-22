@@ -26,13 +26,45 @@
             <span></span>
             <span></span>
           </div>
+        } @else if (isEditing()) {
+          <!-- Mode édition inline -->
+          <div class="edit-mode">
+            <textarea
+              class="edit-textarea"
+              [(ngModel)]="editedContent"
+              (keydown)="onEditKeyDown($event)"
+              [attr.rows]="3"
+              autofocus
+            ></textarea>
+            <div class="edit-actions">
+              <button
+                class="edit-action-btn save-btn"
+                (click)="onSaveEdit()"
+                title="Valider (Entrée)"
+                aria-label="Valider les modifications">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </button>
+              <button
+                class="edit-action-btn cancel-btn"
+                (click)="onCancelEdit()"
+                title="Annuler (Échap)"
+                aria-label="Annuler les modifications">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         } @else {
           <div class="message-text">{{ message.content }}</div>
         }
       </div>
     </div>
 
-    @if (!message.isLoading) {
+    @if (!message.isLoading && !isEditing()) {
       <div class="message-actions">
         <button
           class="action-btn copy-btn"

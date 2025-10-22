@@ -149,11 +149,10 @@ export class ChatComponent implements AfterViewChecked {
   /**
    * Handle edit message event
    */
-  onEditMessage(message: Message): void {
-    if (message.role !== 'user') return;
+  onEditMessage(event: { message: Message, newContent: string }): void {
+    const { message, newContent } = event;
 
-    // Set the message content in the input
-    this.chatInput.setValue(message.content);
+    if (message.role !== 'user') return;
 
     // Delete the message and the assistant response that follows
     const conversation = this.activeConversation();
@@ -171,8 +170,8 @@ export class ChatComponent implements AfterViewChecked {
       }
     }
 
-    // Focus the input
-    setTimeout(() => this.chatInput.focus(), 100);
+    // Send the new message
+    this.onSendMessage(newContent);
   }
 
   /**

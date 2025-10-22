@@ -291,3 +291,115 @@
     }
   }
 }
+
+/* ===================================
+   EDIT MODE (Inline editing)
+   =================================== */
+
+.edit-mode {
+  width: 100%;
+}
+
+.edit-textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  border: 2px solid #10b981;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.6;
+  resize: vertical;
+  background: rgba(255, 255, 255, 0.95);
+  color: #1f2937;
+  transition: all 0.2s ease;
+
+  .user-message & {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #059669;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  }
+
+  @media (max-width: 1080px) {
+    font-size: 0.9375rem;
+    min-height: 60px;
+  }
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  justify-content: flex-end;
+}
+
+.edit-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  @media (max-width: 1080px) {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+  }
+
+  &:hover svg {
+    transform: scale(1.15);
+  }
+}
+
+.cancel-btn {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+  }
+
+  &:hover svg {
+    transform: scale(1.15);
+  }
+}
