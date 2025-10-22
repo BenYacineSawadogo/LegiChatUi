@@ -13,12 +13,18 @@
         </div>
       } @else {
         @for (message of messages(); track message.id) {
-          <app-message [message]="message" />
+          <app-message
+            [message]="message"
+            (copyMessage)="onCopyMessage($event)"
+            (editMessage)="onEditMessage($event)" />
         }
       }
     </div>
 
-    <app-chat-input (messageSent)="onSendMessage($event)" />
+    <app-chat-input
+      (messageSent)="onSendMessage($event)"
+      [isGenerating]="isGenerating()"
+      (stopGeneration)="onStopGeneration()" />
   } @else {
     <div class="no-conversation">
       <div class="empty-icon">📭</div>

@@ -212,3 +212,82 @@
     transform: scale(1.2);
   }
 }
+
+/* ===================================
+   MESSAGE ACTIONS (Copy, Edit)
+   =================================== */
+
+.message-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  .message:hover & {
+    opacity: 1;
+  }
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #6b7280;
+
+  &:hover {
+    background: #f3f4f6;
+    border-color: #10b981;
+    color: #10b981;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
+.copy-btn:hover {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.edit-btn:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+// Sur mobile, toujours afficher les boutons
+@media (max-width: 1080px) {
+  .message-actions {
+    opacity: 1;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

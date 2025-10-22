@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, Input, signal, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -14,7 +14,11 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./chat-input.component.scss']
 })
 export class ChatInputComponent {
+  @ViewChild('messageTextarea') messageTextarea!: ElementRef<HTMLTextAreaElement>;
+
+  @Input() isGenerating: boolean = false;
   @Output() messageSent = new EventEmitter<string>();
+  @Output() stopGeneration = new EventEmitter<void>();
 
   messageInput = signal('');
   isDisabled = signal(false);
@@ -45,5 +49,28 @@ export class ChatInputComponent {
    */
   setDisabled(disabled: boolean): void {
     this.isDisabled.set(disabled);
+  }
+
+  /**
+   * Set value programmatically (for edit feature)
+   */
+  setValue(value: string): void {
+    this.messageInput.set(value);
+  }
+
+  /**
+   * Focus the textarea
+   */
+  focus(): void {
+    if (this.messageTextarea) {
+      this.messageTextarea.nativeElement.focus();
+    }
+  }
+
+  /**
+   * Stop generation
+   */
+  onStop(): void {
+    this.stopGeneration.emit();
   }
 }

@@ -1,10 +1,12 @@
-import { Component, computed, effect, inject, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, computed, effect, inject, ViewChild, ElementRef, AfterViewChecked, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { MessageComponent } from '../../shared/components/message/message.component';
 import { ChatInputComponent } from '../../shared/components/chat-input/chat-input.component';
 import { ConversationService } from '../../core/services/conversation.service';
 import { MessageService } from '../../core/services/message.service';
 import { ChatApiService } from '../../core/services/chat-api.service';
+import { Message } from '../../core/models/message.model';
 
 /**
  * Chat Component
@@ -26,8 +28,11 @@ export class ChatComponent implements AfterViewChecked {
   private chatApiService = inject(ChatApiService);
 
   private shouldScrollToBottom = false;
+  private currentSubscription?: Subscription;
+  private currentAssistantMessageId?: string;
 
   activeConversation = this.conversationService.activeConversation;
+  isGenerating = signal(false);
 
   // Computed property to get messages for active conversation
   messages = computed(() => {
@@ -82,33 +87,113 @@ export class ChatComponent implements AfterViewChecked {
       'assistant'
     );
     this.messageService.setMessageLoading(assistantMessage.id, true);
+    this.currentAssistantMessageId = assistantMessage.id;
 
-    // Disable input while waiting for response
+    // Set generating state
+    this.isGenerating.set(true);
     this.chatInput.setDisabled(true);
 
     try {
-      // Call API
-      this.chatApiService.sendMessage(conversation.id, messageContent).subscribe({
+      // Call API and store subscription for potential cancellation
+      this.currentSubscription = this.chatApiService.sendMessage(conversation.id, messageContent).subscribe({
         next: (response) => {
           // Update assistant message with response
           this.messageService.updateMessage(assistantMessage.id, response.content);
           this.messageService.setMessageLoading(assistantMessage.id, false);
+          this.isGenerating.set(false);
           this.chatInput.setDisabled(false);
+          this.currentSubscription = undefined;
+          this.currentAssistantMessageId = undefined;
         },
         error: (error) => {
           console.error('Error sending message:', error);
-          this.messageService.updateMessage(
-            assistantMessage.id,
-            'Désolé, une erreur s\'est produite. Veuillez réessayer.'
-          );
+
+          // Check if error is from cancellation
+          if (error.name === 'AbortError' || error.message?.includes('aborted')) {
+            this.messageService.updateMessage(
+              assistantMessage.id,
+              '[Génération arrêtée par l\'utilisateur]'
+            );
+          } else {
+            this.messageService.updateMessage(
+              assistantMessage.id,
+              'Désolé, une erreur s\'est produite. Veuillez réessayer.'
+            );
+          }
+
           this.messageService.setMessageLoading(assistantMessage.id, false);
+          this.isGenerating.set(false);
           this.chatInput.setDisabled(false);
+          this.currentSubscription = undefined;
+          this.currentAssistantMessageId = undefined;
         }
       });
     } catch (error) {
       console.error('Error:', error);
       this.messageService.setMessageLoading(assistantMessage.id, false);
+      this.isGenerating.set(false);
       this.chatInput.setDisabled(false);
+      this.currentSubscription = undefined;
+      this.currentAssistantMessageId = undefined;
+    }
+  }
+
+  /**
+   * Handle copy message event
+   */
+  onCopyMessage(content: string): void {
+    console.log('Message copié:', content.substring(0, 50) + '...');
+    // Vous pouvez ajouter une notification ici
+  }
+
+  /**
+   * Handle edit message event
+   */
+  onEditMessage(message: Message): void {
+    if (message.role !== 'user') return;
+
+    // Set the message content in the input
+    this.chatInput.setValue(message.content);
+
+    // Delete the message and the assistant response that follows
+    const conversation = this.activeConversation();
+    if (!conversation) return;
+
+    const messages = this.messageService.getConversationMessages(conversation.id);
+    const messageIndex = messages.findIndex(m => m.id === message.id);
+
+    if (messageIndex !== -1) {
+      // Delete the user message and the next assistant message
+      this.messageService.deleteMessage(message.id);
+
+      if (messageIndex + 1 < messages.length && messages[messageIndex + 1].role === 'assistant') {
+        this.messageService.deleteMessage(messages[messageIndex + 1].id);
+      }
+    }
+
+    // Focus the input
+    setTimeout(() => this.chatInput.focus(), 100);
+  }
+
+  /**
+   * Stop current generation
+   */
+  onStopGeneration(): void {
+    if (this.currentSubscription) {
+      this.currentSubscription.unsubscribe();
+
+      if (this.currentAssistantMessageId) {
+        this.messageService.updateMessage(
+          this.currentAssistantMessageId,
+          '[Génération arrêtée par l\'utilisateur]'
+        );
+        this.messageService.setMessageLoading(this.currentAssistantMessageId, false);
+      }
+
+      this.isGenerating.set(false);
+      this.chatInput.setDisabled(false);
+      this.currentSubscription = undefined;
+      this.currentAssistantMessageId = undefined;
     }
   }
 

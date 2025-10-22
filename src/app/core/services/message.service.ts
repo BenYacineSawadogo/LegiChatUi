@@ -80,6 +80,16 @@ export class MessageService {
   }
 
   /**
+   * Delete a specific message by ID
+   */
+  deleteMessage(messageId: string): void {
+    this.messagesSignal.update(messages =>
+      messages.filter(msg => msg.id !== messageId)
+    );
+    this.saveMessages();
+  }
+
+  /**
    * Delete messages for a conversation
    */
   deleteConversationMessages(conversationId: string): void {
