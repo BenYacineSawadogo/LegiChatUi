@@ -1,305 +1,240 @@
-# 💬 Legichat UI
+# 💬 LegiChat UI
 
-Interface utilisateur moderne et élégante pour Legichat, construite avec Angular 20 et suivant les principes SOLID et Clean Code.
+**Interface utilisateur moderne pour chatbot juridique Burkina Faso**
 
-## 🎨 Caractéristiques
+Frontend Angular 20 + Backend Flask avec Mistral AI et FAISS RAG
 
-- ✨ **Interface moderne** similaire à ChatGPT avec design en bulles
-- 🎨 **Thème vert et blanc** élégant et professionnel
-- 💬 **Gestion de conversations multiples**
-- 🔄 **State management** avec Angular Signals
-- 📱 **Mobile-first design** avec menu burger et responsive complet
-- 🖥️ **Plein écran desktop** - interface occupant 100% de l'espace disponible
-- 💭 **Messages en bulles** avec ombres et animations modernes
-- ⚡ **Performance optimisée** avec standalone components
-- 🏗️ **Architecture SOLID** et Clean Code
-- 💾 **Persistance locale** des conversations et messages
-- 🔌 **Prêt pour intégration API**
-
-## 🚀 Installation et Lancement
-
-### Prérequis
-
-- Node.js (version 18 ou supérieure)
-- npm ou yarn
-
-### Étapes pour lancer le projet
-
-1. **Installer les dépendances**
-   ```bash
-   npm install
-   ```
-
-2. **Lancer le serveur de développement**
-   ```bash
-   npm start
-   # ou
-   ng serve
-   ```
-
-3. **Accéder à l'application**
-
-   Ouvrez votre navigateur et accédez à : `http://localhost:4200`
-
-## 🔧 Configuration de l'API
-
-Pour connecter l'application à votre API Legichat :
-
-1. Ouvrez le fichier `src/app/core/services/chat-api.service.ts`
-
-2. Modifiez la méthode `sendMessage()` pour correspondre à votre API :
-
-```typescript
-sendMessage(conversationId: string, message: string): Observable<Message> {
-  // Remplacez cette partie par votre appel API réel
-  return this.http.post<any>(`${this.apiUrl}/chat`, {
-    conversationId,
-    message
-  }).pipe(
-    map(response => createMessage(
-      response.conversationId,
-      response.content,
-      'assistant'
-    ))
-  );
-}
-```
-
-3. Configurez l'URL de votre API :
-
-```typescript
-// Dans app.config.ts ou un service d'initialisation
-import { ChatApiService } from './core/services/chat-api.service';
-
-// Injectez et configurez
-chatApiService.setApiUrl('https://votre-api-legichat.com/api');
-```
-
-**Note** : Actuellement, l'application utilise des réponses simulées. Remplacez le code dans `sendMessage()` par vos appels API réels.
-
-## 📁 Structure du projet
-
-```
-legichat-ui/
-├── src/
-│   ├── app/
-│   │   ├── core/                    # Logique métier centrale
-│   │   │   ├── models/              # Modèles de données
-│   │   │   │   ├── conversation.model.ts
-│   │   │   │   └── message.model.ts
-│   │   │   ├── services/            # Services de l'application
-│   │   │   │   ├── chat-api.service.ts
-│   │   │   │   ├── conversation.service.ts
-│   │   │   │   ├── message.service.ts
-│   │   │   │   └── storage.service.ts
-│   │   │   └── interfaces/          # Contrats d'interface
-│   │   │       ├── chat-api.interface.ts
-│   │   │       └── storage.interface.ts
-│   │   ├── features/                # Fonctionnalités principales
-│   │   │   ├── chat/                # Module de chat
-│   │   │   │   ├── chat.component.ts
-│   │   │   │   ├── chat.component.html
-│   │   │   │   └── chat.component.scss
-│   │   │   └── conversation-list/   # Liste des conversations
-│   │   │       ├── conversation-list.component.ts
-│   │   │       ├── conversation-list.component.html
-│   │   │       └── conversation-list.component.scss
-│   │   ├── shared/                  # Composants partagés
-│   │   │   └── components/
-│   │   │       ├── message/         # Composant message
-│   │   │       └── chat-input/      # Zone de saisie
-│   │   ├── app.ts                   # Composant racine
-│   │   ├── app.config.ts            # Configuration de l'app
-│   │   └── app.routes.ts            # Routes
-│   ├── styles.scss                  # Styles globaux
-│   └── index.html                   # Point d'entrée HTML
-├── package.json
-├── angular.json
-├── tsconfig.json
-└── README.md
-```
-
-## 🏗️ Architecture SOLID
-
-L'application suit les principes SOLID :
-
-### Single Responsibility Principle (SRP)
-- Chaque service a une responsabilité unique
-- `ConversationService` : gère uniquement les conversations
-- `MessageService` : gère uniquement les messages
-- `StorageService` : gère uniquement le stockage
-
-### Open/Closed Principle (OCP)
-- Les services sont extensibles via des interfaces
-- Possibilité d'ajouter de nouvelles fonctionnalités sans modifier le code existant
-
-### Liskov Substitution Principle (LSP)
-- Les implémentations peuvent être substituées par leurs interfaces
-- `ChatApiService` implémente `IChatApi`
-
-### Interface Segregation Principle (ISP)
-- Interfaces spécifiques et ciblées
-- `IChatApi` : contrat pour l'API de chat
-- `IStorage` : contrat pour le stockage
-
-### Dependency Inversion Principle (DIP)
-- Les modules de haut niveau ne dépendent pas des modules de bas niveau
-- Utilisation d'interfaces et d'injection de dépendances
+---
 
 ## 🎯 Fonctionnalités
 
-### Gestion des conversations
-- ✅ Créer une nouvelle conversation
-- ✅ Sélectionner une conversation
-- ✅ Supprimer une conversation
-- ✅ Aperçu du premier message
-- ✅ Date de dernière modification
+✅ **Chat intelligent** avec IA juridique (Burkina Faso)
+✅ **Rendu Markdown** (gras, italique, listes, code, liens)
+✅ **Sources juridiques** affichées avec scores de pertinence
+✅ **Types de réponse** différenciés visuellement (bleu/vert/violet/orange/rouge)
+✅ **Conversations multiples** avec historique persistant
+✅ **Édition inline** des messages utilisateur
+✅ **Arrêt génération** pendant les réponses
+✅ **Responsive** mobile + desktop avec menu burger
+✅ **State management** avec Angular Signals
+✅ **Architecture SOLID** et Clean Code
 
-### Chat
-- ✅ Envoyer des messages
-- ✅ Recevoir des réponses (simulées ou via API)
-- ✅ Affichage des messages avec avatars
-- ✅ Indicateur de chargement (typing)
-- ✅ Scroll automatique vers le bas
-- ✅ Support Shift+Enter pour nouvelle ligne
+---
 
-### Persistance
-- ✅ Sauvegarde automatique dans localStorage
-- ✅ Restauration des conversations au chargement
-- ✅ Conservation de l'historique des messages
+## ⚡ Démarrage Rapide
 
-## 📱 Design Responsive (Mobile-First)
-
-### Desktop (> 1080px)
-- Interface en plein écran occupant 100% de l'espace disponible
-- Sidebar des conversations visible en permanence (280px)
-- Messages en bulles avec ombres et animations au survol
-- Utilisateur à droite (bulles vertes), chatbot à gauche (bulles blanches)
-
-### Mobile & Tablette (≤ 1080px)
-- Menu burger animé en haut à gauche
-- Sidebar en overlay coulissant depuis la gauche
-- Overlay semi-transparent pour fermer la sidebar
-- Sidebar se ferme automatiquement après sélection d'une conversation
-- Interface de chat plein écran
-- Padding et tailles optimisés pour écrans tactiles
-
-### Fonctionnalités du menu burger
-- Bouton 48x48px avec animation de transformation (burger → X)
-- Sidebar 85% de largeur (max 320px) sur mobile
-- Transition fluide avec `transform: translateX()`
-- Fermeture par tap sur l'overlay ou sélection de conversation
-- Z-index optimisé pour superposition correcte
-
-## 🛠️ Commandes disponibles
-
+### Installation
 ```bash
-# Démarrer le serveur de développement
+npm install
+```
+
+### Lancement
+```bash
 npm start
-# ou
-ng serve
-
-# Compiler le projet
-npm run build
-# ou
-ng build
-
-# Lancer les tests
-npm test
-# ou
-ng test
+# Ouvre http://localhost:4200
 ```
 
-## 🎨 Personnalisation
-
-### Modifier les couleurs
-
-Les couleurs sont définies dans `src/styles.scss` via des variables CSS :
-
-```scss
-:root {
-  --color-primary-green: #10b981;      // Vert principal
-  --color-primary-green-dark: #059669; // Vert foncé
-  --color-primary-green-light: #34d399; // Vert clair
-  // ... autres variables
-}
-```
-
-### Modifier le titre
-
-Dans `src/app/features/conversation-list/conversation-list.component.html` :
-
-```html
-<h1 class="app-title">
-  <span class="logo-icon">💬</span>
-  Legichat <!-- Modifiez ici -->
-</h1>
-```
-
-## 🔌 Intégration de l'API
-
-### Format de requête attendu
-
-```typescript
-POST /chat
-{
-  "conversationId": "string",
-  "message": "string"
-}
-```
-
-### Format de réponse attendu
-
-```typescript
-{
-  "id": "string",
-  "conversationId": "string",
-  "content": "string",
-  "role": "assistant",
-  "timestamp": "Date"
-}
-```
-
-## 📦 Build de production
-
-Pour créer un build de production optimisé :
-
+### Build Production
 ```bash
 npm run build
+# Output dans dist/
 ```
 
-Les fichiers seront générés dans le dossier `dist/`.
+---
 
-## 🐛 Résolution des problèmes
+## 🔌 Intégration Backend
 
-### L'application ne démarre pas
+**👉 Voir [API_INTEGRATION.md](./API_INTEGRATION.md) pour le guide complet**
+
+**Configuration rapide** :
+
+1. **Démarrer le backend Flask** (port 5000)
+   ```bash
+   cd /chemin/vers/LegiChatBackend
+   python app.py
+   ```
+
+2. **L'URL est déjà configurée** dans `src/app/core/services/chat-api.service.ts` :
+   ```typescript
+   private apiUrl = 'http://localhost:5000/api';
+   ```
+
+3. **Tester la connexion** :
+   ```bash
+   curl http://localhost:5000/api/chat \
+     -H "Content-Type: application/json" \
+     -d '{"conversationId":"test","message":"Bonjour"}'
+   ```
+
+---
+
+## 📋 Documentation
+
+| Fichier | Description |
+|---------|-------------|
+| **[API_INTEGRATION.md](./API_INTEGRATION.md)** | Guide complet d'intégration backend (endpoints, formats, tests) |
+| **[CHANGELOG.md](./CHANGELOG.md)** | Historique des changements et versions |
+| **README.md** | Ce fichier - Vue d'ensemble du projet |
+
+---
+
+## 📁 Structure du Projet
+
+```
+src/app/
+├── core/                          # Logique métier
+│   ├── models/                    # Message, Conversation, ResponseMetadata
+│   ├── services/                  # ChatApiService, MessageService, ConversationService
+│   └── interfaces/                # IChatApi
+├── features/                      # Fonctionnalités principales
+│   ├── chat/                      # Interface de chat
+│   └── conversation-list/         # Liste des conversations
+└── shared/                        # Composants partagés
+    ├── components/                # Message, ChatInput
+    └── pipes/                     # MarkdownPipe
+```
+
+---
+
+## 🎨 Stack Technique
+
+**Frontend** :
+- Angular 20.3.6 (Standalone Components)
+- TypeScript 5.6
+- SCSS
+- RxJS
+- Marked (Markdown rendering)
+
+**Backend** :
+- Flask (Python)
+- Mistral AI (LLM)
+- FAISS (Vector search)
+- Contexte juridique : Burkina Faso
+
+---
+
+## 🔧 Commandes Utiles
 
 ```bash
-# Supprimer node_modules et réinstaller
+# Développement
+npm start                  # Serveur dev (port 4200)
+npm run build             # Build production
+npm test                  # Lancer les tests
+
+# Vérifications
+npm run lint              # Linter
+ng build --configuration production  # Build optimisé
+```
+
+---
+
+## 🧩 Fonctionnalités Détaillées
+
+### 1. Affichage des Messages
+
+- **Markdown** : `**gras**`, `*italique*`, `[liens](url)`, listes, code
+- **Sources juridiques** : Documents consultés avec pertinence (%)
+- **Types visuels** :
+  - 🔵 Bleu = Réponse juridique (`legal_answer`)
+  - 🟢 Vert = Lien document (`document_link`)
+  - 🟣 Violet = Résumé (`document_summary`)
+  - 🟠 Orange = Non trouvé (`not_found`)
+  - 🔴 Rouge = Erreur (`error`)
+
+### 2. Gestion des Conversations
+
+- Création/suppression de conversations
+- Historique sauvegardé dans LocalStorage
+- Contexte maintenu par le backend (RAM)
+- Sélection rapide via sidebar
+
+### 3. Édition et Actions
+
+- **Édition inline** : Cliquer ✏️ sur message utilisateur
+- **Copie** : Cliquer 📋 pour copier le texte
+- **Stop** : Bouton ■ pour arrêter la génération
+
+### 4. Responsive Design
+
+- **Mobile** (<1080px) : Menu burger, layout adapté
+- **Desktop** (>1080px) : Sidebar fixe, plein écran
+- Animations fluides et transitions
+
+---
+
+## 🚀 Déploiement Production
+
+### Frontend
+1. Build : `npm run build`
+2. Déployer `dist/legichat-ui/` sur Netlify/Vercel
+3. Configurer domaine
+
+### Backend
+1. Déployer Flask sur Heroku/AWS
+2. Obtenir domaine avec HTTPS
+3. Mettre à jour `apiUrl` dans le frontend
+4. Migrer historique vers MongoDB/PostgreSQL
+
+---
+
+## 🐛 Dépannage
+
+**Port 4200 déjà utilisé** :
+```bash
+ng serve --port 4201
+```
+
+**Erreurs d'installation** :
+```bash
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-### Erreurs de compilation
+**Backend non accessible** :
+- Vérifier que `python app.py` tourne
+- Vérifier CORS dans backend : `origins=["http://localhost:4200"]`
+- Tester avec curl
 
-```bash
-# Vérifier la version de Node.js
-node --version  # Doit être >= 18
-
-# Nettoyer le cache npm
-npm cache clean --force
-```
-
-## 📝 Notes techniques
-
-- **Framework** : Angular 20.3.6
-- **Language** : TypeScript 5.7
-- **Style** : SCSS
-- **State Management** : Angular Signals
-- **HTTP Client** : Angular HttpClient avec fetch API
-- **Architecture** : Standalone Components
-- **Persistance** : localStorage
+**Markdown non rendu** :
+- Déjà implémenté avec `MarkdownPipe`
+- Vérifie que `marked` est installé : `npm list marked`
 
 ---
 
-**Développé avec ❤️ pour Legichat**
+## 📊 Statistiques
+
+- **Bundle size** : 107 kB (gzipped)
+- **Components** : 6 standalone
+- **Services** : 3 (API, Messages, Conversations)
+- **Pipes** : 1 (Markdown)
+- **Lines of code** : ~2500
+
+---
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche : `git checkout -b feature/nom`
+3. Commit : `git commit -m "Description"`
+4. Push : `git push origin feature/nom`
+5. Créer une Pull Request
+
+---
+
+## 📄 Licence
+
+Projet privé - Tous droits réservés
+
+---
+
+## 👨‍💻 Développé avec
+
+Angular 20 + TypeScript + SCSS + RxJS + Marked
+
+Intégration Backend Flask + Mistral AI + FAISS
+
+---
+
+**Dernière mise à jour** : 2025-10-23
+**Version** : 1.0.0
+**Auteur** : LegiChat Team
