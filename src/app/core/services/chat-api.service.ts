@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IChatApi } from '../interfaces/chat-api.interface';
-import { Message } from '../models/message.model';
+import { Message, ResponseMetadata } from '../models/message.model';
 
 /**
  * Chat API Service implementing IChatApi interface
@@ -28,6 +28,7 @@ export class ChatApiService implements IChatApi {
   /**
    * Send message to backend and get AI response
    * Backend handles conversation context automatically
+   * API v2.1: Includes metadata with responseType and sources
    */
   sendMessage(conversationId: string, message: string): Observable<Message> {
     return this.http.post<ChatResponse>(`${this.apiUrl}/chat`, {
@@ -40,14 +41,15 @@ export class ChatApiService implements IChatApi {
         content: response.content,
         role: 'assistant' as const,
         timestamp: new Date(response.timestamp),
-        isLoading: false
+        isLoading: false,
+        metadata: response.metadata  // API v2.1: response type and sources
       }))
     );
   }
 }
 
 /**
- * Response format from Flask backend
+ * Response format from Flask backend (API v2.1)
  */
 interface ChatResponse {
   id: string;
@@ -55,4 +57,5 @@ interface ChatResponse {
   content: string;
   role: string;
   timestamp: string;
+  metadata: ResponseMetadata;  // v2.1: response type, country, sources
 }

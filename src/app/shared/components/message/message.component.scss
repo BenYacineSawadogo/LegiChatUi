@@ -403,3 +403,152 @@
     transform: scale(1.15);
   }
 }
+
+/* ===================================
+   SOURCES JURIDIQUES (API v2.1)
+   =================================== */
+
+.message-sources {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  animation: slideIn 0.3s ease-out;
+
+  .assistant-message & {
+    border-top-color: #e5e7eb;
+  }
+}
+
+.sources-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+
+  svg {
+    color: #10b981;
+    flex-shrink: 0;
+  }
+
+  .assistant-message & {
+    color: #4b5563;
+  }
+
+  .user-message & {
+    color: rgba(255, 255, 255, 0.9);
+
+    svg {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+.sources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.source-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 0.625rem;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  transition: background 0.2s ease;
+
+  .assistant-message & {
+    background: #f3f4f6;
+  }
+
+  .user-message & {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  &:hover {
+    background: rgba(16, 185, 129, 0.1);
+
+    .assistant-message & {
+      background: #e5e7eb;
+    }
+
+    .user-message & {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+}
+
+.source-name {
+  flex: 1;
+  font-weight: 500;
+  color: #374151;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .user-message & {
+    color: white;
+  }
+}
+
+.source-relevance {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: #10b981;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 12px;
+  margin-left: 0.5rem;
+
+  .user-message & {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive
+@media (max-width: 1080px) {
+  .message-sources {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .sources-header {
+    font-size: 0.8125rem;
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  .source-item {
+    padding: 0.3125rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .source-relevance {
+    font-size: 0.6875rem;
+    padding: 0.0625rem 0.375rem;
+  }
+}
