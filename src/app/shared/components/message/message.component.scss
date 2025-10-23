@@ -93,11 +93,15 @@
   }
 
   .assistant-message & {
-    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+    color: #fbbf24;
   }
 
   .bot-icon {
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover {
@@ -920,7 +924,8 @@
 
   .message-avatar {
     .assistant-message & {
-      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fbbf24;
     }
   }
 
