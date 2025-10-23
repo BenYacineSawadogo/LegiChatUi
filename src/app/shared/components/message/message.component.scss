@@ -552,3 +552,165 @@
     padding: 0.0625rem 0.375rem;
   }
 }
+
+/* ===================================
+   RESPONSE TYPES (API v2.1)
+   Styles différenciés par type de réponse
+   =================================== */
+
+// Réponse juridique classique (bleu)
+.message-bubble.response-legal-answer {
+  border-left: 4px solid #2196F3 !important;
+  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%) !important;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15) !important;
+
+  .message-text {
+    color: #0D47A1;
+  }
+
+  .message-sources {
+    border-top-color: #90CAF9;
+  }
+
+  .sources-header {
+    color: #1565C0;
+
+    svg {
+      color: #2196F3;
+    }
+  }
+
+  .source-item {
+    background: rgba(33, 150, 243, 0.1);
+
+    &:hover {
+      background: rgba(33, 150, 243, 0.2);
+    }
+  }
+
+  .source-relevance {
+    background: rgba(33, 150, 243, 0.15);
+    color: #1565C0;
+  }
+}
+
+// Lien vers document (vert)
+.message-bubble.response-document-link {
+  border-left: 4px solid #4CAF50 !important;
+  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%) !important;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15) !important;
+
+  .message-text {
+    color: #1B5E20;
+  }
+
+  // Style les liens HTML dans le content
+  a {
+    color: #2E7D32;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #1B5E20;
+    }
+  }
+}
+
+// Résumé de document (violet)
+.message-bubble.response-document-summary {
+  border-left: 4px solid #9C27B0 !important;
+  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%) !important;
+  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15) !important;
+
+  .message-text {
+    color: #4A148C;
+  }
+
+  // Style spécial pour le header "Résumé du document"
+  .message-text::before {
+    content: '📋 Résumé du document';
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #6A1B9A;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #CE93D8;
+  }
+
+  .message-sources {
+    border-top-color: #CE93D8;
+  }
+}
+
+// Information non trouvée (orange/warning)
+.message-bubble.response-not-found {
+  border-left: 4px solid #FF9800 !important;
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%) !important;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15) !important;
+
+  .message-text {
+    color: #E65100;
+    font-weight: 500;
+
+    &::before {
+      content: '⚠️ ';
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Erreur système (rouge)
+.message-bubble.response-error {
+  border-left: 4px solid #F44336 !important;
+  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%) !important;
+  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15) !important;
+
+  .message-text {
+    color: #C62828;
+    font-weight: 500;
+
+    &::before {
+      content: '❌ ';
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// Animation d'apparition pour les types spéciaux
+.message-bubble.response-legal-answer,
+.message-bubble.response-document-link,
+.message-bubble.response-document-summary,
+.message-bubble.response-not-found,
+.message-bubble.response-error {
+  animation: responseTypeAppear 0.4s ease-out;
+}
+
+@keyframes responseTypeAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+// Responsive
+@media (max-width: 1080px) {
+  .message-bubble.response-document-summary {
+    .message-text::before {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .message-bubble.response-not-found .message-text::before,
+  .message-bubble.response-error .message-text::before {
+    font-size: 1.1rem;
+  }
+}
