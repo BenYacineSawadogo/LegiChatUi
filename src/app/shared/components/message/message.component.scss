@@ -4,8 +4,8 @@
 
 .message {
   display: flex;
-  gap: 0.875rem;
-  padding: 1.25rem 1.5rem;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
   animation: fadeIn 0.3s ease-in;
   margin-bottom: 0.5rem;
 
@@ -115,11 +115,11 @@
 .message-content-wrapper {
   flex: 1;
   min-width: 0;
-  max-width: 75%;
+  max-width: 85%;
 
   // Sur mobile, prendre plus d'espace
   @media (max-width: 1080px) {
-    max-width: 85%;
+    max-width: 90%;
   }
 }
 
@@ -144,7 +144,7 @@
 
 /* Bulle de message */
 .message-bubble {
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1rem;
   transition: all 0.3s ease;
 
   &:hover {
@@ -556,21 +556,12 @@
 /* ===================================
    RESPONSE TYPES (API v2.1)
    Styles différenciés par type de réponse
+   Garde le fond blanc, utilise bordures colorées
    =================================== */
 
-// Réponse juridique classique (bleu)
+// Réponse juridique classique (bleu) - bordure seulement
 .message-bubble.response-legal-answer {
   border-left: 4px solid #2196F3 !important;
-  background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%) !important;
-  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15) !important;
-
-  .message-text {
-    color: #0D47A1;
-  }
-
-  .message-sources {
-    border-top-color: #90CAF9;
-  }
 
   .sources-header {
     color: #1565C0;
@@ -581,27 +572,27 @@
   }
 
   .source-item {
-    background: rgba(33, 150, 243, 0.1);
+    background: rgba(33, 150, 243, 0.05);
 
     &:hover {
-      background: rgba(33, 150, 243, 0.2);
+      background: rgba(33, 150, 243, 0.1);
     }
   }
 
   .source-relevance {
-    background: rgba(33, 150, 243, 0.15);
+    background: rgba(33, 150, 243, 0.1);
     color: #1565C0;
   }
 }
 
-// Lien vers document (vert)
+// Lien vers document (vert) - bordure seulement
 .message-bubble.response-document-link {
   border-left: 4px solid #4CAF50 !important;
-  background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%) !important;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15) !important;
 
-  .message-text {
-    color: #1B5E20;
+  .sources-header {
+    svg {
+      color: #4CAF50;
+    }
   }
 
   // Style les liens HTML dans le content
@@ -617,86 +608,49 @@
   }
 }
 
-// Résumé de document (violet)
+// Résumé de document (violet) - bordure seulement
 .message-bubble.response-document-summary {
   border-left: 4px solid #9C27B0 !important;
-  background: linear-gradient(135deg, #F3E5F5 0%, #E1BEE7 100%) !important;
-  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.15) !important;
 
-  .message-text {
-    color: #4A148C;
+  .sources-header {
+    svg {
+      color: #9C27B0;
+    }
   }
 
-  // Style spécial pour le header "Résumé du document"
+  // Badge pour le type de réponse
   .message-text::before {
-    content: '📋 Résumé du document';
-    display: block;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: #6A1B9A;
+    content: '📋 Résumé';
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #9C27B0;
+    background: rgba(156, 39, 176, 0.1);
+    padding: 0.25rem 0.625rem;
+    border-radius: 12px;
     margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #CE93D8;
-  }
-
-  .message-sources {
-    border-top-color: #CE93D8;
   }
 }
 
-// Information non trouvée (orange/warning)
+// Information non trouvée (orange/warning) - bordure seulement
 .message-bubble.response-not-found {
   border-left: 4px solid #FF9800 !important;
-  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%) !important;
-  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.15) !important;
 
-  .message-text {
-    color: #E65100;
-    font-weight: 500;
-
-    &::before {
-      content: '⚠️ ';
-      font-size: 1.25rem;
-      margin-right: 0.5rem;
-    }
+  .message-text::before {
+    content: '⚠️ ';
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
   }
 }
 
-// Erreur système (rouge)
+// Erreur système (rouge) - bordure seulement
 .message-bubble.response-error {
   border-left: 4px solid #F44336 !important;
-  background: linear-gradient(135deg, #FFEBEE 0%, #FFCDD2 100%) !important;
-  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15) !important;
 
-  .message-text {
-    color: #C62828;
-    font-weight: 500;
-
-    &::before {
-      content: '❌ ';
-      font-size: 1.25rem;
-      margin-right: 0.5rem;
-    }
-  }
-}
-
-// Animation d'apparition pour les types spéciaux
-.message-bubble.response-legal-answer,
-.message-bubble.response-document-link,
-.message-bubble.response-document-summary,
-.message-bubble.response-not-found,
-.message-bubble.response-error {
-  animation: responseTypeAppear 0.4s ease-out;
-}
-
-@keyframes responseTypeAppear {
-  from {
-    opacity: 0;
-    transform: translateX(-10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
+  .message-text::before {
+    content: '❌ ';
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
   }
 }
 
@@ -704,8 +658,8 @@
 @media (max-width: 1080px) {
   .message-bubble.response-document-summary {
     .message-text::before {
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
     }
   }
 
