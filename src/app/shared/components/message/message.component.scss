@@ -116,6 +116,7 @@
   flex: 1;
   min-width: 0;
   max-width: 85%;
+  overflow: hidden; // Empêche le débordement
 
   // Sur mobile, prendre plus d'espace
   @media (max-width: 1080px) {
@@ -146,6 +147,10 @@
 .message-bubble {
   padding: 0.75rem 1rem;
   transition: all 0.3s ease;
+  max-width: 100%; // Empêche le débordement
+  overflow-wrap: break-word; // Casse les longs mots
+  word-wrap: break-word; // Compatibilité navigateurs anciens
+  overflow: hidden; // Empêche tout débordement
 
   &:hover {
     transform: translateY(-2px);
@@ -171,12 +176,21 @@
   }
 
   line-height: 1.6;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .message-text {
   white-space: pre-wrap;
   word-wrap: break-word;
   word-break: break-word;
+  max-width: 100%;
+  overflow-wrap: break-word;
+
+  // Force tous les éléments enfants à respecter la largeur
+  * {
+    max-width: 100%;
+  }
 }
 
 .typing-indicator {
@@ -714,7 +728,9 @@
     padding: 0.75rem;
     border-radius: 8px;
     overflow-x: auto;
+    overflow-y: hidden;
     margin: 0.75rem 0;
+    max-width: 100%;
 
     .user-message & {
       background: rgba(255, 255, 255, 0.15);
@@ -723,6 +739,7 @@
     code {
       background: none;
       padding: 0;
+      white-space: pre;
     }
   }
 
@@ -776,6 +793,8 @@
     text-decoration: underline;
     font-weight: 500;
     transition: color 0.2s ease;
+    word-break: break-all; // Casse les URLs longues
+    overflow-wrap: break-word;
 
     &:hover {
       color: #059669;
@@ -827,11 +846,15 @@
     width: 100%;
     margin: 0.75rem 0;
     font-size: 0.9em;
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
 
     th, td {
       border: 1px solid rgba(0, 0, 0, 0.1);
       padding: 0.5rem;
       text-align: left;
+      white-space: nowrap;
     }
 
     th {
