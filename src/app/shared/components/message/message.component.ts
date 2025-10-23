@@ -90,4 +90,14 @@ export class MessageComponent {
       this.onCancelEdit();
     }
   }
+
+  /**
+   * Check if sources array contains at least one valid source
+   */
+  hasValidSources(sources: any[]): boolean {
+    return sources.some(source =>
+      (source.document && source.document.trim() !== '') ||
+      (source.type && source.type.trim() !== '')
+    );
+  }
 }

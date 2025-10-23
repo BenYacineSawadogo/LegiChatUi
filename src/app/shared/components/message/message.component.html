@@ -69,7 +69,7 @@
           <div class="message-text" [innerHTML]="message.content | markdown"></div>
 
           <!-- Sources juridiques (API v2.1) -->
-          @if (message.role === 'assistant' && message.metadata && message.metadata.sources && message.metadata.sources.length > 0) {
+          @if (message.role === 'assistant' && message.metadata && message.metadata.sources && message.metadata.sources.length > 0 && hasValidSources(message.metadata.sources)) {
             <div class="message-sources">
               <div class="sources-header">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -80,12 +80,11 @@
               </div>
               <ul class="sources-list">
                 @for (source of message.metadata.sources; track source.document || $index) {
-                  <li class="source-item">
-                    <span class="source-name">{{ source.document || source.type }}</span>
-                    @if (source.relevance) {
-                      <span class="source-relevance">{{ (source.relevance * 100) | number:'1.0-0' }}%</span>
-                    }
-                  </li>
+                  @if (source.document || source.type) {
+                    <li class="source-item">
+                      <span class="source-name">{{ source.document || source.type }}</span>
+                    </li>
+                  }
                 }
               </ul>
             </div>

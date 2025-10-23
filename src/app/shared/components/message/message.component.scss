@@ -573,29 +573,29 @@
    Garde le fond blanc, utilise bordures colorées
    =================================== */
 
-// Réponse juridique classique (bleu) - bordure seulement
+// Réponse juridique classique (vert) - bordure seulement
 .message-bubble.response-legal-answer {
-  border-left: 4px solid #2196F3 !important;
+  border-left: 4px solid #10b981 !important;
 
   .sources-header {
-    color: #1565C0;
+    color: #059669;
 
     svg {
-      color: #2196F3;
+      color: #10b981;
     }
   }
 
   .source-item {
-    background: rgba(33, 150, 243, 0.05);
+    background: rgba(16, 185, 129, 0.05);
 
     &:hover {
-      background: rgba(33, 150, 243, 0.1);
+      background: rgba(16, 185, 129, 0.1);
     }
   }
 
   .source-relevance {
-    background: rgba(33, 150, 243, 0.1);
-    color: #1565C0;
+    background: rgba(16, 185, 129, 0.1);
+    color: #059669;
   }
 }
 
