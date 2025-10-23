@@ -34,15 +34,15 @@
 }
 
 .chat-header {
-  padding: 1.25rem 1.75rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid #e5e7eb;
   background: white;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   // Responsive: padding réduit sur mobile et tablette
   @media (max-width: 1080px) {
-    padding: 1rem 1.25rem;
+    padding: 0.875rem 1rem;
     // Ajouter du padding-left pour éviter que le burger cache le titre
     padding-left: 5rem; // Espace pour le burger (48px + marges)
   }
@@ -50,8 +50,8 @@
 
 .conversation-title {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 700;
+  font-size: 1.125rem;
+  font-weight: 600;
   color: #1f2937;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   -webkit-background-clip: text;
