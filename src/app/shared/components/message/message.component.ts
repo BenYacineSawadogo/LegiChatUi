@@ -2,15 +2,16 @@ import { Component, Input, Output, EventEmitter, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Message } from '../../../core/models/message.model';
+import { MarkdownPipe } from '../../pipes/markdown.pipe';
 
 /**
  * Message Component
- * Displays a single chat message
+ * Displays a single chat message with Markdown support
  */
 @Component({
   selector: 'app-message',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MarkdownPipe],
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
