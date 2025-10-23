@@ -38,10 +38,9 @@ export class ConversationService {
     if (stored && stored.length > 0) {
       this.conversationsSignal.set(stored);
       this.activeConversationIdSignal.set(stored[0].id);
-    } else {
-      // Create initial conversation if none exists
-      this.createNewConversation();
     }
+    // Don't create initial conversation automatically
+    // User must click "New Chat" button to start
   }
 
   /**
