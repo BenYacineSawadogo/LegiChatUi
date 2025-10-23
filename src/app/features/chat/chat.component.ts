@@ -97,9 +97,12 @@ export class ChatComponent implements AfterViewChecked {
       // Call API and store subscription for potential cancellation
       this.currentSubscription = this.chatApiService.sendMessage(conversation.id, messageContent).subscribe({
         next: (response) => {
-          // Update assistant message with response
-          this.messageService.updateMessage(assistantMessage.id, response.content);
-          this.messageService.setMessageLoading(assistantMessage.id, false);
+          // Update assistant message with response including metadata
+          this.messageService.updateMessageFromResponse(assistantMessage.id, {
+            content: response.content,
+            metadata: response.metadata,
+            isLoading: false
+          });
           this.isGenerating.set(false);
           this.chatInput.setDisabled(false);
           this.currentSubscription = undefined;

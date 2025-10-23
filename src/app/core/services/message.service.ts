@@ -69,6 +69,18 @@ export class MessageService {
   }
 
   /**
+   * Update message with complete data from API response
+   */
+  updateMessageFromResponse(messageId: string, response: Partial<Message>): void {
+    this.messagesSignal.update(messages =>
+      messages.map(msg =>
+        msg.id === messageId ? { ...msg, ...response } : msg
+      )
+    );
+    this.saveMessages();
+  }
+
+  /**
    * Set message loading state
    */
   setMessageLoading(messageId: string, isLoading: boolean): void {
