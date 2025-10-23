@@ -198,37 +198,53 @@
    =================================== */
 
 :host-context(.dark) {
-  .chat-input-wrapper {
+  .chat-input-container {
     background: #0f172a;
     border-top-color: #334155;
   }
 
-  .chat-input {
+  .input-wrapper {
     background: #1e293b;
-    color: #e2e8f0;
     border-color: #475569;
+
+    &:focus-within {
+      border-color: #10b981;
+      background: #334155;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.25);
+    }
+  }
+
+  .message-input {
+    color: #e2e8f0;
 
     &::placeholder {
       color: #64748b;
     }
 
-    &:focus {
-      border-color: #10b981;
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    &::-webkit-scrollbar-thumb {
+      background: #475569;
+
+      &:hover {
+        background: #64748b;
+      }
     }
   }
 
-  .send-btn {
+  .send-button {
     &:disabled {
       background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
     }
   }
 
-  .stop-btn {
+  .stop-button {
     background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
 
     &:hover {
       background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
     }
+  }
+
+  .info-text {
+    color: #64748b;
   }
 }
