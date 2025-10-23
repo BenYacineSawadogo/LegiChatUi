@@ -15,12 +15,15 @@
       <span class="logo-icon">💬</span>
       Legichat
     </h1>
-    <button class="new-chat-btn" (click)="onNewConversation()" aria-label="Nouvelle conversation">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M5 12h14"/>
-      </svg>
-      Nouveau chat
-    </button>
+    <div class="header-actions">
+      <app-theme-toggle></app-theme-toggle>
+      <button class="new-chat-btn" (click)="onNewConversation()" aria-label="Nouvelle conversation">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+        Nouveau chat
+      </button>
+    </div>
   </div>
 
   <div class="conversations-list">

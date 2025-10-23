@@ -2,6 +2,7 @@ import { Component, inject, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConversationService } from '../../core/services/conversation.service';
 import { Conversation } from '../../core/models/conversation.model';
+import { ThemeToggleComponent } from '../../shared/components/theme-toggle/theme-toggle.component';
 
 /**
  * Conversation List Component
@@ -11,7 +12,7 @@ import { Conversation } from '../../core/models/conversation.model';
 @Component({
   selector: 'app-conversation-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThemeToggleComponent],
   templateUrl: './conversation-list.component.html',
   styleUrls: ['./conversation-list.component.scss']
 })

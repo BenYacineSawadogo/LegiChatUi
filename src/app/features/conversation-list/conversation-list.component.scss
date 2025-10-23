@@ -173,8 +173,14 @@
   }
 }
 
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
 .new-chat-btn {
-  width: 100%;
+  flex: 1;
   padding: 0.875rem 1rem;
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   color: white;
@@ -319,5 +325,69 @@
 
   &:active {
     transform: scale(0.95) rotate(5deg);
+  }
+}
+
+/* ===================================
+   DARK MODE STYLES
+   =================================== */
+
+:host-context(.dark) {
+  .burger-menu {
+    background: #059669;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+
+    &:hover {
+      background: #047857;
+    }
+  }
+
+  .sidebar-overlay.visible {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .conversation-sidebar {
+    background: #1e293b;
+    border-right-color: #334155;
+  }
+
+  .sidebar-header {
+    background: #0f172a;
+    border-bottom-color: #334155;
+  }
+
+  .app-title {
+    color: #10b981;
+  }
+
+  .conversations-list {
+    background: #1e293b;
+  }
+
+  .conversation-item {
+    background: #334155;
+    border-color: #475569;
+
+    &:hover {
+      background: #475569;
+      border-color: #10b981;
+    }
+
+    &.active {
+      background: #0f172a;
+      border-color: #10b981;
+    }
+  }
+
+  .conversation-title {
+    color: #f1f5f9;
+  }
+
+  .conversation-preview {
+    color: #94a3b8;
+  }
+
+  .conversation-date {
+    color: #64748b;
   }
 }

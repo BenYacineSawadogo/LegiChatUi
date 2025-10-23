@@ -227,3 +227,46 @@ input, textarea {
 .slide-in {
   animation: slideIn var(--transition-slow);
 }
+
+/* ===================================
+   DARK MODE
+   =================================== */
+
+.dark {
+  /* Dark Background Colors */
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+
+  /* Dark Text Colors */
+  --color-text-primary: #f1f5f9;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+
+  /* Dark Border Colors */
+  --color-border: #334155;
+  --color-border-light: #475569;
+
+  /* Override light mode scrollbar */
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+
+    &:hover {
+      background: var(--color-border-light);
+    }
+  }
+}
+
+/* Apply dark mode styles to body */
+.dark body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: var(--color-text-primary);
+}

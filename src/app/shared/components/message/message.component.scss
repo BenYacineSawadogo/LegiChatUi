@@ -900,3 +900,150 @@
     }
   }
 }
+
+/* ===================================
+   DARK MODE STYLES
+   =================================== */
+
+:host-context(.dark) {
+  .message.assistant-message {
+    .message-bubble {
+      background: #1e293b;
+      color: #e2e8f0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .message-role {
+      color: #10b981;
+    }
+  }
+
+  .message-avatar {
+    .assistant-message & {
+      background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
+    }
+  }
+
+  .message-time {
+    color: #64748b;
+  }
+
+  .message-content {
+    .assistant-message & {
+      color: #e2e8f0;
+    }
+  }
+
+  // Action buttons
+  .action-btn {
+    border-color: #475569;
+    color: #94a3b8;
+
+    &:hover {
+      background: #334155;
+      border-color: #10b981;
+      color: #10b981;
+    }
+  }
+
+  // Edit mode
+  .edit-textarea {
+    background: #1e293b;
+    color: #e2e8f0;
+    border-color: #475569;
+
+    &:focus {
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+    }
+  }
+
+  // Sources
+  .message-sources {
+    border-top-color: #334155;
+  }
+
+  .sources-header {
+    color: #cbd5e1;
+  }
+
+  .source-item {
+    background: #0f172a;
+
+    &:hover {
+      background: #334155;
+    }
+  }
+
+  .source-name {
+    color: #cbd5e1;
+  }
+
+  // Response types in dark mode
+  .message-bubble.response-legal-answer {
+    background: #1e293b !important;
+    border-left-color: #10b981 !important;
+  }
+
+  .message-bubble.response-document-link {
+    background: #1e293b !important;
+    border-left-color: #4CAF50 !important;
+  }
+
+  .message-bubble.response-document-summary {
+    background: #1e293b !important;
+    border-left-color: #9C27B0 !important;
+
+    .message-text::before {
+      background: rgba(156, 39, 176, 0.2);
+    }
+  }
+
+  .message-bubble.response-not-found {
+    background: #1e293b !important;
+    border-left-color: #FF9800 !important;
+  }
+
+  .message-bubble.response-error {
+    background: #1e293b !important;
+    border-left-color: #F44336 !important;
+  }
+
+  // Markdown content
+  .message-text {
+    code {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    pre {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    blockquote {
+      border-left-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    a {
+      color: #34d399;
+
+      &:hover {
+        color: #10b981;
+      }
+    }
+
+    hr {
+      border-top-color: rgba(255, 255, 255, 0.1);
+    }
+
+    table {
+      th, td {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+
+      th {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
